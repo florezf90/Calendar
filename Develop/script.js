@@ -1,23 +1,17 @@
 var saveButton = $(".saveBtn");
 var textarea =  $(".description");
-var timeslots = $("body").children("div")
-var textarea = $("textarea")
-var currentime = dayjs().format('h:mm A'); // Format the current time in 12-hour format
-var slots =  JSON.parse(localStorage.getItem("task")) || {
+var timeslots = $(".container-lg nav")
+// console.log(timeslots);
+
+var slots = JSON.parse(localStorage.getItem("task")) || {
 
   Hour: [],
   dutie: [],
 }
-console.log(currentime);
 
-
-
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+// Wrap all code that interacts with the DOM in a call to jQuery to ensure that the code isn't run until the browser has finished 
+// rendering all the elements in the html.
 $(document).ready(function () {
-
-
 
   saveButton.on("click", function () {
      
@@ -30,26 +24,10 @@ $(document).ready(function () {
     console.log(slots);
 
     localStorage.setItem("task", JSON.stringify(slots));
-    // localStorage.setItem(classname, JSON.stringify(task));
     console.log(task)
-
-//////////////////////////////////////////////////////////////////
- 
-
-
   })
 
-  // function renderTask() {
-  //   var storedItems = JSON.parse(localStorage.getItem("task"));
-
-    
-
-  //   if (storedItems !== null ) {
-  //     console.log("soy falcao");
-  //     textarea.text(storedItems.dutie);
-  //   }
-    
-  // }
+  // renders back the info from the DOM, to the corresponding time slot
 
   function renderTask() {
     var storedItems = JSON.parse(localStorage.getItem("task"));
@@ -68,7 +46,46 @@ $(document).ready(function () {
         }
       }
     }
+    
   }
+
+  // assings the class name depending of tthe time of the day gotten with dajs
+
+  //  function juan () {
+  //   timeslots.each(function () {
+  //     var idAttribute = parseInt($(this).attr("id"));
+  //     console.log(idAttribute)
+  //     console.log(typeof idAttribute)
+  //   })
+  //  }
+
+
+   
+   function comparetime () {
+    timeslots.each(function () {
+      var idAttribute = parseInt($(this).attr("id"));
+      var xd = parseInt(dayjs().format('H'), 10);
+      console.log(idAttribute)
+       
+       if (idAttribute < xd) {
+        $(this).addClass("past")
+
+       } else if (idAttribute > xd ) {
+
+        $(this).addClass("future")
+
+       } else {
+        $(this).addClass("present")
+
+
+       }
+    })
+   }
+
+
+  
+
+comparetime();
   renderTask();
 
 
@@ -80,29 +97,8 @@ $(document).ready(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
+
   var today = dayjs()
   $("header").children().eq(1).text("Calendar app for scheduling your work day: "+ today.format("MMM D, YYYY"));
 
 });
-
-
-
-
-
-
-/// check Jquery syntax
-/// check bootsrap documents and intro videos 
-/// check this JS
-// check dayJS
-
-
-// 1 once knowing basics of Jquery and DayJS, implement code to render current day and time in the top of the page
-///----check out for code in activity 5 form submmitions
-
-
-
-// 2 make an approach that will create or delete time slots depending of the time of the day, and also, make it change class names depending of
-// the time of the day so we can apply different CSS styling automatic.
-
-// 3 Make an approach that will save the task into the DOM, by doing an eventlistener that uses "THIS", which will create a new object in the DOM
-//, it will help to collect info by time slots instead of being one single array.
