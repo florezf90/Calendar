@@ -1,8 +1,6 @@
 var saveButton = $(".saveBtn");
 var textarea =  $(".description");
 var timeslots = $(".container-lg nav")
-// console.log(timeslots);
-
 var slots = JSON.parse(localStorage.getItem("task")) || {
 
   Hour: [],
@@ -47,20 +45,9 @@ $(document).ready(function () {
       }
     }
     
-  }
+  };
 
-  // assings the class name depending of tthe time of the day gotten with dajs
-
-  //  function juan () {
-  //   timeslots.each(function () {
-  //     var idAttribute = parseInt($(this).attr("id"));
-  //     console.log(idAttribute)
-  //     console.log(typeof idAttribute)
-  //   })
-  //  }
-
-
-   
+  // assings the class name depending of tthe time of the day gotten with dajs  
    function comparetime () {
     timeslots.each(function () {
       var idAttribute = parseInt($(this).attr("id"));
@@ -76,27 +63,12 @@ $(document).ready(function () {
 
        } else {
         $(this).addClass("present")
-
-
        }
     })
-   }
-
-
-  
+   };
 
 comparetime();
   renderTask();
-
-
-
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
 
   var today = dayjs()
   $("header").children().eq(1).text("Calendar app for scheduling your work day: "+ today.format("MMM D, YYYY"));
